@@ -1,5 +1,3 @@
-# models.py
-
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -18,7 +16,7 @@ CAR_STATUS_CHOICES = (
 class USR(AbstractUser):
     is_admin = models.BooleanField('Is admin', default=False)
     is_customer = models.BooleanField('Is customer', default=False)
-    is_employee = models.BooleanField('Is employee', default=False)
+    is_employee = models.BooleanField('Is employee', default=True)
 
 class Department(models.Model):
     DepartmentName = models.CharField(max_length=250)
@@ -30,6 +28,7 @@ class Department(models.Model):
         return self.DepartmentName
 
 class Employee(models.Model):
+    user = models.OneToOneField(USR, on_delete=models.CASCADE, related_name='employee_profile', default=None)
     FirstName = models.CharField(max_length=250)
     LastName = models.CharField(max_length=250)
     FullName = models.CharField(max_length=250)
@@ -41,6 +40,7 @@ class Employee(models.Model):
         return self.FirstName + " " + self.LastName
 
 class Customer(models.Model):
+    user = models.OneToOneField(USR, on_delete=models.CASCADE, related_name='customer_profile', default=None)
     FirstName = models.CharField(max_length=250)
     LastName = models.CharField(max_length=250)
     FullName = models.CharField(max_length=250)
