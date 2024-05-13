@@ -55,3 +55,15 @@ def customer(request):
 
 def employee(request):
     return render(request, 'employee.html')
+
+def charts(request):
+    return render(request, 'charts.html')
+
+def tables(request):
+    return render(request, 'tables.html')    
+
+def services(request):
+    return render(request, 'services.html')
+
+def service_rec(request):
+    return render(request, 'service_rec.html')
